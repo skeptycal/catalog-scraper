@@ -44,7 +44,6 @@ class CourseOffering(Model):
     id = Column(Integer, primary_key=True)
     course_id = Column(Integer, ForeignKey('courses.id'))
     term = Column(String(10))
-    year = Column(Integer)
     crn = Column(Integer)
     section = Column(Integer)
     pass_nopass = Column(Boolean)
