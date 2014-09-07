@@ -4,6 +4,7 @@ import sys
 import urllib2
 
 from models import session, Course, CourseOffering
+from sandman_models import SCourse, SCourseOffering
 
 
 def get_co_type(item):
@@ -103,5 +104,16 @@ if __name__ == '__main__':
         from models import init_db
         init_db()
 
-    get_all_courses()
-    get_all_course_offerings()
+    # get_all_courses()
+    # get_all_course_offerings()
+    from sandman import app
+
+    app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/catalog.db'
+
+    from sandman.model import register, activate
+    from sandman_models import SCourse, SCourseOffering
+
+    register((SCourse, SCourseOffering))
+    activate(browser=True)
+
+    app.run()
